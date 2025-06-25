@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CMS Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <header>
+    <h1>Conference Management System</h1>
+    <div class="user-info">
+      <span>Welcome, <strong>John Doe</strong></span>
+      <span class="role">(Organizer)</span>
+      <a href="signin.html" class="logout">Logout</a>
+    </div>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Submit Paper</a></li>
+      <li><a href="#">My Submissions</a></li>
+      <li><a href="#">Reviews</a></li>
+      <li><a href="#">Award Decisions</a></li>
+      <li><a href="#">Manage Conference</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="overview">
+      <h2>Dashboard Overview</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Total Submissions</h3>
+          <p>45</p>
+        </div>
+        <div class="card">
+          <h3>Papers Reviewed</h3>
+          <p>30</p>
+        </div>
+        <div class="card">
+          <h3>Awards Granted</h3>
+          <p>8</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="notices">
+      <h2>Announcements</h2>
+      <ul>
+        <li>📢 Deadline for paper submission: <strong>July 15, 2025</strong></li>
+        <li>📝 Reviews must be completed by: <strong>July 20, 2025</strong></li>
+        <li>🏆 Final awards announcement: <strong>July 30, 2025</strong></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
