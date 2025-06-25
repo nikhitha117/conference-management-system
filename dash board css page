@@ -1,0 +1,100 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f7fa;
+}
+
+header {
+  background-color: #007BFF;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-info {
+  text-align: right;
+}
+
+.user-info .role {
+  display: block;
+  font-size: 0.85em;
+  color: #e0e0e0;
+}
+
+.logout {
+  color: white;
+  margin-left: 10px;
+  text-decoration: underline;
+}
+
+nav {
+  background-color: #003e7e;
+}
+
+nav ul {
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+main {
+  padding: 30px;
+}
+
+.overview h2,
+.notices h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  flex: 1 1 200px;
+  text-align: center;
+}
+
+.card h3 {
+  color: #007BFF;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.notices ul {
+  padding-left: 20px;
+  color: #444;
+}
+
+.notices li {
+  margin-bottom: 10px;
+}
