@@ -1,0 +1,119 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class ConferenceSystem {
+    public static void main(String[] args) {
+        // Initialize Organizer, Participant, and Judge
+        Organizer organizer = new Organizer();
+        Participant participant = new Participant("Ramya", "ramya@example.com", "The Future of Cybersecurity");
+        Judge judge1 = new Judge();
+        Judge judge2 = new Judge();
+
+        // Step 1: Organizer sends form to participant
+        organizer.sendForm(participant);
+
+        // Step 2: Participant submits the filled form with paper details
+        participant.submitForm();
+
+        // Step 3: First judge reviews and selects the paper
+        boolean isSelected = judge1.reviewPaper(participant);
+        if (isSelected) {
+            System.out.println("Judge 1: Paper selected!");
+
+            // Step 4: Organizer sends venue, date, and time details
+            String venue = "Conference Hall A";
+            String date = "2024-11-15";
+            String time = "11:00 AM";
+            organizer.sendDetails(participant.getEmail(), venue, date, time);
+
+            // Step 5: Final judge decides if the participant receives an award
+            boolean isAwarded = judge2.finalizeAwardDecision(participant);
+            if (isAwarded) {
+                System.out.println("Final Judge: " + participant.getName() + " has been awarded!");
+            } else {
+                System.out.println("Final Judge: " + participant.getName() + " did not receive the award.");
+            }
+        } else {
+            System.out.println("Judge 1: Paper not selected.");
+        }
+    }
+
+    // Organizer class
+    static class Organizer {
+        public void sendForm(Participant participant) {
+            System.out.println("Organizer: Form sent to " + participant.getName());
+        }
+
+        public void sendDetails(String email, String venue, String date, String time) {
+            System.out.println("Organizer: Sending details to " + email);
+            System.out.println("Venue: " + venue);
+            System.out.println("Date: " + date);
+            System.out.println("Time: " + time);
+        }
+    }
+
+    // Participant class
+    static class Participant {
+        private String name;
+        private String email;
+        private String paperTitle;
+
+        public Participant(String name, String email, String paperTitle) {
+            this.name = name;
+            this.email = email;
+            this.paperTitle = paperTitle;
+            saveToDatabase();
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public String getPaperTitle() {
+            return paperTitle;
+        }
+
+        public void submitForm() {
+            System.out.println("Participant " + name + " submitted the paper titled: " + paperTitle);
+        }
+
+        private void saveToDatabase() {
+            String url = "jdbc:postgresql://localhost:5432/conference";
+            String user = "postgres"; // Replace with your PostgreSQL username
+            String password = "use your password"; // Replace with your PostgreSQL password
+
+            String sql = "INSERT INTO participants (name, email, paper_title) VALUES (?, ?, ?)";
+
+            try (Connection connection = DriverManager.getConnection(url, user, password)) {
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setString(1, this.name);
+                statement.setString(2, this.email);
+                statement.setString(3, this.paperTitle);
+
+                statement.executeUpdate();
+                System.out.println("Participant " + this.name + " saved to the database.");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Judge class
+    static class Judge {
+        public boolean reviewPaper(Participant participant) {
+            System.out.println("Judge: Reviewing paper titled '" + participant.getPaperTitle() + "' by " + participant.getName());
+            return true; // Simulated selection
+        }
+
+        public boolean finalizeAwardDecision(Participant participant) {
+            System.out.println("Final Judge: Finalizing decision for " + participant.getName());
+            return true; // Simulated award decision
+        }
+    }
+}
